@@ -3,7 +3,7 @@ const form = document.getElementById("form");
 const username = document.getElementById("username");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const passowrd2 = document.getElementById("password2");
+const password2 = document.getElementById("password2");
 
 // Show input error message
 function showError(input, message) {
@@ -26,12 +26,21 @@ function isValidEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+// Check required fields
+function checkRequired(inputArr) {
+  inputArr.forEach(function (input) {
+    if (input.value === "") {
+      showError(input, `${input.value.toUpperCase()} is required`);
+    }
+  });
+}
+
 // Event listeners
 form.addEventListener("submit", function (event) {
   // Prevent default submit button functionality
   event.preventDefault();
 
-  if (username.value === "") {
+  /*if (username.value === "") {
     showError(username, "Username is required");
   } else {
     showSuccess(username);
@@ -55,5 +64,7 @@ form.addEventListener("submit", function (event) {
     showError(password2, "Password2 is required");
   } else {
     showSuccess(password2);
-  }
+  }*/
+
+  checkRequired([username, email, password, password2]);
 });
